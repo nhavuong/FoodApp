@@ -12,7 +12,4 @@ public interface ApiInterface {
     @GET("fooddata.json")
     Call<List<FoodData>> getAllData();
 
-
-    // lets make our model class of json data.
-
 }

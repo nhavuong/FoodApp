@@ -12,8 +12,6 @@ import com.bumptech.glide.Glide;
 
 public class FoodDetails extends AppCompatActivity {
 
-    // now we will get data from intent and set to UI
-
     ImageView imageView;
     TextView itemName, itemPrice, itemRating;
     RatingBar ratingBar;

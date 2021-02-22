@@ -33,8 +33,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
     public PopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.popular_recycler_items, parent, false);
-         // here we need to create a layout for recyclerview cell items.
-
 
         return new PopularViewHolder(view);
     }

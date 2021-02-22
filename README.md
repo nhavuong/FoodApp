@@ -1,6 +1,6 @@
 # FoodApp
 
-Date: 02/10/2021 Team Member: Hengxuan Dong, Nina Nha Vuong, Zhi-Zhan Jiang Github: https://github.com/nhavuong/FlavorPho
+Date: 02/10/2021 Team Member: Hengxuan Dong, Nina Nha Vuong, Zhi-Zhan Jiang Github: https://github.com/nhavuong/FoodApp
 
 Introduction: Because of Covid-19 impact, mobile ordering and payment is the safest one for everyone when they want to order food since it involves little to no human contact. That has accelerated adoption by both restaurants and consumers. Giving the changing scenarios, largely, consumers have come to expect the ability of a restaurant to allow them to place orders online. Using an online ordering mobile app will not only ensure that the restaurants are able to survive the pandemic but also prepares them for future demand. People are going to get habituated of the convenience and safety that this model provides, and thus, would prefer engaging with restaurants brands that provide online ordering and doorstep delivery options.
 

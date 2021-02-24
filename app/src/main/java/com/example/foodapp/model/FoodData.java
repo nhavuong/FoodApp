@@ -9,7 +9,8 @@ public class FoodData {
 
     @SerializedName("popular")
     @Expose
-    private List<Popular> popular = null;
+    private List<Category> category = null;
+
     @SerializedName("recommended")
     @Expose
     private List<Recommended> recommended = null;
@@ -17,12 +18,12 @@ public class FoodData {
     @Expose
     private List<Allmenu> allmenu = null;
 
-    public List<Popular> getPopular() {
-        return popular;
+    public List<Category> getCategory() {
+        return category;
     }
 
-    public void setPopular(List<Popular> popular) {
-        this.popular = popular;
+    public void setCategory(List<Category> category) {
+        this.category = category;
     }
 
     public List<Recommended> getRecommended() {

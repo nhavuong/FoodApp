@@ -1,15 +1,15 @@
 package com.example.foodapp.retrofit;
 
-import com.example.foodapp.model.FoodData;
+
+import com.example.foodapp.model.Category;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ApiInterface {
 
-    @GET("fooddata.json")
-    Call<List<FoodData>> getAllData();
+    @GET("category")
+    Call<List<Category>> getCategory();
 
 }

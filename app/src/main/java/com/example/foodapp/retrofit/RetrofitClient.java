@@ -20,5 +20,5 @@ public class RetrofitClient {
         return retrofit;
 
     }
-
+    // http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/category
 }

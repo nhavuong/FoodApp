@@ -40,18 +40,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position) {
 
-        holder.categoryName.setText(categoryList.get(position).getName());
+        holder.categoryName.setText(categoryList.get(position).getCat_name());
 
-        Glide.with(context).load(categoryList.get(position).getImageUrl()).into(holder.categoryImage);
+        Glide.with(context).load(categoryList.get(position).getCat_img()).into(holder.categoryImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, FoodDetails.class);
-                i.putExtra("name", categoryList.get(position).getName());
+                i.putExtra("name", categoryList.get(position).getCat_name());
                // i.putExtra("price", categoryList.get(position).getPrice());
                 //i.putExtra("rating", categoryList.get(position).getRating());
-                i.putExtra("image", categoryList.get(position).getImageUrl());
+                i.putExtra("image", categoryList.get(position).getCat_img());
 
                 context.startActivity(i);
             }

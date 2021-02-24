@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.foodapp.adapter.AllMenuAdapter;
@@ -33,14 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
     ApiInterface apiInterface;
 
+    private static final String TAG = "MAINACTIVITY";
     RecyclerView categoryRecyclerView, recommendedRecyclerView, allMenuRecyclerView;
 
     CategoryAdapter categoryAdapter;
     RecommendedAdapter recommendedAdapter;
     AllMenuAdapter allMenuAdapter;
-
-//    static final String BASE_URL = "Foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
-//    static Retrofit retrofit = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectCategory() {
-//        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<List<Category>> call = apiInterface.getCategory();
         call.enqueue(new Callback<List<Category>>() {
             @Override
@@ -84,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-
+                System.out.println(call.request());
+                Log.e(TAG, t.getMessage());
             }
         });
 
@@ -97,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         categoryRecyclerView.setLayoutManager(layoutManager);
         categoryRecyclerView.setAdapter(categoryAdapter);
-
     }
 
 

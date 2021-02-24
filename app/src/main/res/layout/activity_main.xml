@@ -117,6 +117,7 @@
         android:layout_marginStart="104dp"
         android:layout_marginTop="3dp"
         android:fontFamily="sans-serif-condensed-medium"
+        android:autoLink="phone"
         android:text="Please call: (562) 402-0909"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"

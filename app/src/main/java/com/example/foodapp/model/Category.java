@@ -5,11 +5,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Category {
+    @SerializedName("cat_id")
+    @Expose
+    private int id;
 
-    @SerializedName("name")
+    @SerializedName("cat_name")
     @Expose
     private String name;
-    @SerializedName("imageUrl")
+
+    @SerializedName("cat_img")
     @Expose
     private String imageUrl;
 //    @SerializedName("rating")
@@ -27,6 +31,13 @@ public class Category {
 //    @SerializedName("note")
 //    @Expose
 //    private String note;
+    public int getId() {
+    return id;
+}
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

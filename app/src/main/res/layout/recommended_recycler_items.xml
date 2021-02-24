@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="220dp"
-    android:layout_height="300dp"
+    android:layout_width="180dp"
+    android:layout_height="250dp"
     android:layout_marginLeft="16dp"
     android:background="@drawable/recycler_bg">
 
 
     <ImageView
         android:id="@+id/recommended_image"
-        android:layout_width="0dp"
-        android:layout_height="210dp"
+        android:layout_width="165dp"
+        android:layout_height="166dp"
         android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/recommended_name"
-        android:layout_width="136dp"
-        android:layout_height="66dp"
+        android:layout_width="100dp"
+        android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans_bold"

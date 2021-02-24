@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodapp.FoodDetails;
 import com.example.foodapp.R;
+import com.example.foodapp.model.Food;
 import com.example.foodapp.model.Recommended;
 
 import java.util.List;
@@ -21,9 +22,9 @@ import java.util.List;
 public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder> {
 
     private Context context;
-    private List<Recommended> recommendedList;
+    private List<Food> recommendedList;
 
-    public RecommendedAdapter(Context context, List<Recommended> recommendedList) {
+    public RecommendedAdapter(Context context, List<Food> recommendedList) {
         this.context = context;
         this.recommendedList = recommendedList;
     }
@@ -38,22 +39,24 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, final int position) {
 
-        holder.recommendedName.setText(recommendedList.get(position).getName());
+        holder.recommendedName.setText(recommendedList.get(position).getFood_name());
         //holder.recommendedRating.setText(recommendedList.get(position).getRating());
         //holder.recommendedCharges.setText(recommendedList.get(position).getDeliveryCharges());
         //holder.recommendedDeliveryTime.setText(recommendedList.get(position).getDeliveryTime());
-        holder.recommendedPrice.setText("$ "+recommendedList.get(position).getPrice());
+        holder.recommendedPrice.setText("$ "+recommendedList.get(position).getFood_price());
 
-        Glide.with(context).load(recommendedList.get(position).getImageUrl()).into(holder.recommendedImage);
+        String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+
+        Glide.with(context).load(BASE_URL + recommendedList.get(position).getFood_img()).into(holder.recommendedImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, FoodDetails.class);
-                i.putExtra("name", recommendedList.get(position).getName());
-                i.putExtra("price", recommendedList.get(position).getPrice());
+                i.putExtra("name", recommendedList.get(position).getFood_name());
+                i.putExtra("price", recommendedList.get(position).getFood_price());
                 //i.putExtra("rating", recommendedList.get(position).getRating());
-                i.putExtra("image", recommendedList.get(position).getImageUrl());
+                i.putExtra("image", recommendedList.get(position).getFood_img());
 
                 context.startActivity(i);
             }

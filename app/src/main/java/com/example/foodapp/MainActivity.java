@@ -6,14 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.foodapp.adapter.AllMenuAdapter;
 
 import com.example.foodapp.adapter.CategoryAdapter;
 import com.example.foodapp.adapter.RecommendedAdapter;
-import com.example.foodapp.model.Allmenu;
-import com.example.foodapp.model.FoodData;
+import com.example.foodapp.model.Food;
 import com.example.foodapp.model.Category;
 
 import com.example.foodapp.model.Recommended;
@@ -25,9 +23,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         connectCategory();
+        connectRecommend();
 //        Call<Category> call = apiInterface.getCategory();
 //        call.enqueue(new Callback<Category>() {
 //            @Override
@@ -77,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                getCategoryData(response.body());
+                populateCategoryData(response.body());
             }
 
             @Override
@@ -89,7 +85,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getCategoryData(List<Category> categoryList){
+    private void connectRecommend() {
+        Call<List<Food>> call = apiInterface.getRecommend();
+        call.enqueue(new Callback<List<Food>>() {
+            @Override
+            public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+                populateRecommendedData(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Food>> call, Throwable t) {
+                System.out.println(call.request());
+                Log.e(TAG, t.getMessage());
+            }
+        });
+
+    }
+
+    private void populateCategoryData(List<Category> categoryList){
 
         categoryRecyclerView = findViewById(R.id.category_recycler);
         categoryAdapter = new CategoryAdapter(this, categoryList);
@@ -99,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void  getRecommendedData(List<Recommended> recommendedList){
+    private void populateRecommendedData(List<Food> recommendedList){
 
         recommendedRecyclerView = findViewById(R.id.recommended_recycler);
         recommendedAdapter = new RecommendedAdapter(this, recommendedList);
@@ -109,15 +122,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void  getAllMenu(List<Allmenu> allmenuList){
-
-        allMenuRecyclerView = findViewById(R.id.all_menu_recycler);
-        allMenuAdapter = new AllMenuAdapter(this, allmenuList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        allMenuRecyclerView.setLayoutManager(layoutManager);
-        allMenuRecyclerView.setAdapter(allMenuAdapter);
-        allMenuAdapter.notifyDataSetChanged();
-
-    }
+//    private void  getAllMenu(List<Allmenu> allmenuList){
+//
+//       // allMenuRecyclerView = findViewById(R.id.all_menu_recycler);
+//        allMenuAdapter = new AllMenuAdapter(this, allmenuList);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        allMenuRecyclerView.setLayoutManager(layoutManager);
+//        allMenuRecyclerView.setAdapter(allMenuAdapter);
+//        allMenuAdapter.notifyDataSetChanged();
+//
+//    }
 
 }

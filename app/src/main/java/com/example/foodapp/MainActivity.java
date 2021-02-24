@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-
         connectCategory();
 //        Call<Category> call = apiInterface.getCategory();
 //        call.enqueue(new Callback<Category>() {
@@ -75,13 +74,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectCategory() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<List<Category>> call = apiInterface.getCategory();
         call.enqueue(new Callback<List<Category>>() {

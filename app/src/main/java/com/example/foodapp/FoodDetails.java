@@ -16,6 +16,7 @@ public class FoodDetails extends AppCompatActivity {
     TextView itemName, itemPrice, itemRating;
     RatingBar ratingBar;
 
+    int id;
     String name, price, rating, imageUrl;
 
     @Override
@@ -25,7 +26,6 @@ public class FoodDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        name = intent.getStringExtra("name");
         price = intent.getStringExtra("price");
         //rating = intent.getStringExtra("rating");
         imageUrl = intent.getStringExtra("image");

@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "Foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+    private static final String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
 
     public static Retrofit getRetrofitInstance(){
 

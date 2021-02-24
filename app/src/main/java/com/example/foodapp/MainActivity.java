@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     RecommendedAdapter recommendedAdapter;
     AllMenuAdapter allMenuAdapter;
 
-    static final String BASE_URL = "Foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
-    static Retrofit retrofit = null;
+//    static final String BASE_URL = "Foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+//    static Retrofit retrofit = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectCategory() {
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+//        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<List<Category>> call = apiInterface.getCategory();
         call.enqueue(new Callback<List<Category>>() {
             @Override

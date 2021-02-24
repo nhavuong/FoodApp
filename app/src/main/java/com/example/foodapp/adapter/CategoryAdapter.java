@@ -41,8 +41,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position) {
 
         holder.categoryName.setText(categoryList.get(position).getCat_name());
-
-        Glide.with(context).load(categoryList.get(position).getCat_img()).into(holder.categoryImage);
+        String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+        System.out.println(BASE_URL + categoryList.get(position).getCat_img());
+        Glide.with(context).load(BASE_URL + categoryList.get(position).getCat_img()).into(holder.categoryImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

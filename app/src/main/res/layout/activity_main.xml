@@ -105,6 +105,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed-light"
+        android:autoLink="map"
         android:text="11444 South St. Cerritos, CA 90703"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"

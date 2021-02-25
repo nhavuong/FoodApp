@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/foodNametv"
+        android:layout_width="0dp"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/foodPricetv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="$9.99"
+        android:textSize="20sp"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/addbtnTocart"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Add" />
+
+</LinearLayout>

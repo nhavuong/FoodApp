@@ -7,6 +7,7 @@ import com.example.foodapp.model.Food;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -16,4 +17,6 @@ public interface ApiInterface {
     @GET("recommend")
     Call<List<Food>> getRecommend();
 
+    @GET("search/{keyword}")
+    Call<List<Food>> getSearchResult(@Path("keyword") String keyword);
 }

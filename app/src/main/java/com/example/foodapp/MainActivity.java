@@ -4,8 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.foodapp.adapter.AllMenuAdapter;
 
@@ -32,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAINACTIVITY";
     RecyclerView categoryRecyclerView, recommendedRecyclerView, allMenuRecyclerView;
 
+    EditText search_bar;
     CategoryAdapter categoryAdapter;
     RecommendedAdapter recommendedAdapter;
     AllMenuAdapter allMenuAdapter;
@@ -41,31 +49,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         connectCategory();
         connectRecommend();
-//        Call<Category> call = apiInterface.getCategory();
-//        call.enqueue(new Callback<Category>() {
-//            @Override
-//            public void onResponse(Call<List<FoodData>> call, Response<List<FoodData>> response) {
-//
-//                List<FoodData> foodDataList = response.body();
-//
-//
-//                getCategoryData(foodDataList.get(0).getCategory());
-//
-//                getRecommendedData(foodDataList.get(0).getRecommended());
-//
-//                getAllMenu(foodDataList.get(0).getAllmenu());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<FoodData>> call, Throwable t) {
-//                Toast.makeText(MainActivity.this, "Server is not responding.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
+        search_bar = findViewById(R.id.editText);
+        search_bar.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // https://stackoverflow.com/questions/3205339/android-how-to-make-keyboard-enter-button-say-search-and-handle-its-click
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Log.i(TAG, "search now : " + search_bar.getText().toString());
+                    Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                    intent.putExtra("searchKeyword", search_bar.getText().toString());
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void connectCategory() {
@@ -121,16 +123,4 @@ public class MainActivity extends AppCompatActivity {
         recommendedRecyclerView.setAdapter(recommendedAdapter);
 
     }
-
-//    private void  getAllMenu(List<Allmenu> allmenuList){
-//
-//       // allMenuRecyclerView = findViewById(R.id.all_menu_recycler);
-//        allMenuAdapter = new AllMenuAdapter(this, allmenuList);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        allMenuRecyclerView.setLayoutManager(layoutManager);
-//        allMenuRecyclerView.setAdapter(allMenuAdapter);
-//        allMenuAdapter.notifyDataSetChanged();
-//
-//    }
-
 }

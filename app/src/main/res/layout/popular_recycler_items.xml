@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/all_menu_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="106dp"
+        android:layout_height="115dp"
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

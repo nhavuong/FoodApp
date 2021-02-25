@@ -22,14 +22,16 @@
         <TextView
             android:id="@+id/recommended_name"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="2"
-            android:layout_height="match_parent"/>
+            android:fontFamily="sans-serif-condensed-medium" />
 
         <TextView
             android:id="@+id/recommended_price"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent"/>
+            android:fontFamily="sans-serif-condensed-light" />
     </LinearLayout>
 
 

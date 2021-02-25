@@ -60,10 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 // https://stackoverflow.com/questions/3205339/android-how-to-make-keyboard-enter-button-say-search-and-handle-its-click
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     Log.i(TAG, "search now : " + search_bar.getText().toString());
-                    Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
-                    intent.putExtra("searchKeyword", search_bar.getText().toString());
-                    startActivity(intent);
-                    return true;
+                    if(search_bar.getText().toString().length() != 0){
+                        Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                        intent.putExtra("searchKeyword", search_bar.getText().toString());
+                        startActivity(intent);
+                    }
+                    else{
+                        return true;
+                    }
                 }
                 return false;
             }

@@ -53,11 +53,11 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, FoodDetails.class);
-                i.putExtra("name", recommendedList.get(position).getFood_name());
-                i.putExtra("price", recommendedList.get(position).getFood_price());
+                i.putExtra("food_name", recommendedList.get(position).getFood_name());
+                i.putExtra("food_price", recommendedList.get(position).getFood_price());
                 //i.putExtra("rating", recommendedList.get(position).getRating());
-                i.putExtra("image", recommendedList.get(position).getFood_img());
-
+                i.putExtra("food_img", recommendedList.get(position).getFood_img());
+                i.putExtra("food_description", recommendedList.get(position).getFood_description());
                 context.startActivity(i);
             }
         });

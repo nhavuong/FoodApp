@@ -13,11 +13,12 @@ import com.bumptech.glide.Glide;
 public class FoodDetails extends AppCompatActivity {
 
     ImageView imageView;
-    TextView itemName, itemPrice, itemRating;
-    RatingBar ratingBar;
+    TextView itemName, itemPrice, itemDescription;
+    //RatingBar ratingBar;
 
     int id;
-    String name, price, rating, imageUrl;
+    String name, rating, imageUrl, description;
+    Double price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +27,25 @@ public class FoodDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        price = intent.getStringExtra("price");
+        name = intent.getStringExtra("food_name");
+        price = intent.getDoubleExtra("food_price",0.0);
         //rating = intent.getStringExtra("rating");
-        imageUrl = intent.getStringExtra("image");
+        imageUrl = intent.getStringExtra("food_img");
+        description = intent.getStringExtra("food_description");
 
         imageView = findViewById(R.id.imageView5);
         itemName = findViewById(R.id.name);
         itemPrice = findViewById(R.id.price);
+        itemDescription = findViewById(R.id.description);
         //itemRating = findViewById(R.id.rating);
         //ratingBar = findViewById(R.id.ratingBar);
 
-        Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
+        String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+
+        Glide.with(getApplicationContext()).load(BASE_URL + imageUrl).into(imageView);
         itemName.setText(name);
         itemPrice.setText("$ "+price);
+        itemDescription.setText(description);
         //itemRating.setText(rating);
         //ratingBar.setRating(Float.parseFloat(rating));
 

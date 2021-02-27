@@ -42,8 +42,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         holder.categoryName.setText(categoryList.get(position).getCat_name());
         String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+        String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
 
-        Glide.with(context).load(BASE_URL + categoryList.get(position).getCat_img()).into(holder.categoryImage);
+        Glide.with(context).load(BASE_URL2 + categoryList.get(position).getCat_img()).into(holder.categoryImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

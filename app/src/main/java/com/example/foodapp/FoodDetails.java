@@ -41,8 +41,9 @@ public class FoodDetails extends AppCompatActivity {
         //ratingBar = findViewById(R.id.ratingBar);
 
         String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
+        String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
 
-        Glide.with(getApplicationContext()).load(BASE_URL + imageUrl).into(imageView);
+        Glide.with(getApplicationContext()).load(BASE_URL2 + imageUrl).into(imageView);
         itemName.setText(name);
         itemPrice.setText("$ "+price);
         itemDescription.setText(description);

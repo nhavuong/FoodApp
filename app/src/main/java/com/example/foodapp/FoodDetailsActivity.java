@@ -2,6 +2,7 @@ package com.example.foodapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.example.foodapp.model.Food;
 
 public class FoodDetailsActivity extends AppCompatActivity {
 
-    ImageView imageView;
+    ImageView imageView, checkCart;
     TextView itemName, itemPrice, itemDescription, itemCount;
     //RatingBar ratingBar;
 
@@ -32,7 +33,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         itemCount = findViewById(R.id.count);
-
+        itemCount.setText(String.valueOf(Cart.cart.size()));
         id = intent.getIntExtra("food_id",0);
         name = intent.getStringExtra("food_name");
         price = intent.getDoubleExtra("food_price",0.0);
@@ -59,7 +60,18 @@ public class FoodDetailsActivity extends AppCompatActivity {
         //itemRating.setText(rating);
         //ratingBar.setRating(Float.parseFloat(rating));
 
+        checkCart = (ImageView)findViewById(R.id.imageView4);
+        checkCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext() ,CartListActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
+
+    //https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
 
     public void addFood(View view)
     {

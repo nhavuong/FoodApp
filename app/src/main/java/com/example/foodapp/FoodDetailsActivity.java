@@ -4,19 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodapp.adapter.CartAdapter;
+import com.example.foodapp.model.Cart;
+import com.example.foodapp.model.Food;
 
-public class FoodDetails extends AppCompatActivity {
+public class FoodDetailsActivity extends AppCompatActivity {
 
     ImageView imageView;
-    TextView itemName, itemPrice, itemDescription;
+    TextView itemName, itemPrice, itemDescription, itemCount;
     //RatingBar ratingBar;
 
-    int id;
+    int id, cat_id, is_recommend;
     String name, rating, imageUrl, description;
     Double price;
 
@@ -27,11 +31,14 @@ public class FoodDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        id = intent.getIntExtra("food_id",0);
         name = intent.getStringExtra("food_name");
         price = intent.getDoubleExtra("food_price",0.0);
         //rating = intent.getStringExtra("rating");
         imageUrl = intent.getStringExtra("food_img");
         description = intent.getStringExtra("food_description");
+        cat_id = intent.getIntExtra("cat_id",0);
+        is_recommend = intent.getIntExtra("is_recommend",0);
 
         imageView = findViewById(R.id.imageView5);
         itemName = findViewById(R.id.name);
@@ -50,5 +57,15 @@ public class FoodDetails extends AppCompatActivity {
         //itemRating.setText(rating);
         //ratingBar.setRating(Float.parseFloat(rating));
 
+    }
+
+    public void addFood(View view)
+    {
+        Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend);
+
+        Cart.cart.add(food);
+        int count = Cart.cart.size();
+        itemCount = findViewById((R.id.count));
+        itemCount.setText(count);
     }
 }

@@ -12,10 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodapp.FoodDetails;
+import com.example.foodapp.FoodDetailsActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.model.Food;
-import com.example.foodapp.model.Recommended;
 
 import java.util.List;
 
@@ -53,12 +52,15 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, FoodDetails.class);
+                Intent i = new Intent(context, FoodDetailsActivity.class);
+                i.putExtra("food_id", recommendedList.get(position).getFood_id());
                 i.putExtra("food_name", recommendedList.get(position).getFood_name());
                 i.putExtra("food_price", recommendedList.get(position).getFood_price());
                 //i.putExtra("rating", recommendedList.get(position).getRating());
                 i.putExtra("food_img", recommendedList.get(position).getFood_img());
                 i.putExtra("food_description", recommendedList.get(position).getFood_description());
+                i.putExtra("cat_id", recommendedList.get(position).getCat_id());
+                i.putExtra("is_recommend", recommendedList.get(position).getIs_recommend());
                 context.startActivity(i);
             }
         });

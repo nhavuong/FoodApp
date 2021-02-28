@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodapp.FoodDetails;
+import com.example.foodapp.FoodDetailsActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.model.Allmenu;
 
@@ -52,7 +52,7 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, FoodDetails.class);
+                Intent i = new Intent(context, FoodDetailsActivity.class);
                 i.putExtra("name", allmenuList.get(position).getName());
                 i.putExtra("price", allmenuList.get(position).getPrice());
                 //i.putExtra("rating", allmenuList.get(position).getRating());

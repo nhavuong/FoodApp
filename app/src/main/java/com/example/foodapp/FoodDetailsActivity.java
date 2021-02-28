@@ -31,6 +31,8 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        itemCount = findViewById(R.id.count);
+
         id = intent.getIntExtra("food_id",0);
         name = intent.getStringExtra("food_name");
         price = intent.getDoubleExtra("food_price",0.0);
@@ -62,10 +64,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
     public void addFood(View view)
     {
         Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend);
-
         Cart.cart.add(food);
-        int count = Cart.cart.size();
-        itemCount = findViewById((R.id.count));
-        itemCount.setText(count);
+        itemCount.setText(String.valueOf(Cart.cart.size()));
     }
 }

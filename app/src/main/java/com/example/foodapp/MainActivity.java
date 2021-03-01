@@ -126,4 +126,9 @@ public class MainActivity extends AppCompatActivity {
         recommendedRecyclerView.setAdapter(recommendedAdapter);
 
     }
+
+    public void goToUser(View view) {
+        Intent i = new Intent(getApplicationContext(), UserActivity.class);
+        startActivity(i);
+    }
 }

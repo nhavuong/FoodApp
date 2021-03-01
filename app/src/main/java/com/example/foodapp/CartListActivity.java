@@ -52,7 +52,7 @@ public class CartListActivity extends AppCompatActivity {
     private void populateCartList(List<Food> foodList){
         recycle_cart = findViewById(R.id.recycler_cart);
         cartAdapter = new CartAdapter(foodList, this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recycle_cart.setLayoutManager(layoutManager);
         recycle_cart.setAdapter(cartAdapter);
 

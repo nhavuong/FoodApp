@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.foodapp.FoodDetailsActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.model.Category;
+import com.example.foodapp.retrofit.RetrofitClient;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
         String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
 
-        Glide.with(context).load(BASE_URL2 + categoryList.get(position).getCat_img()).into(holder.categoryImage);
+        Glide.with(context).load(RetrofitClient.BASE_URL2 + categoryList.get(position).getCat_img()).into(holder.categoryImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

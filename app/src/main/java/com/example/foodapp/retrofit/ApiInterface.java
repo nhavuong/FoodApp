@@ -27,5 +27,6 @@ public interface ApiInterface {
     @POST("reg")
     Call<SignUpResponse> performSignUp(@Field("name") String name,
                                        @Field("email") String email,
-                                       @Field("password") String password);
+                                       @Field("password") String password,
+                                       @Field("phone") String phone);
 }

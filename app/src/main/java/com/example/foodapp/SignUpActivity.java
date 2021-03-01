@@ -21,7 +21,7 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
 
     CircularProgressIndicator progress_circular;
-    EditText emailEditText, passwordEditText, usernameEditText;
+    EditText emailEditText, passwordEditText, usernameEditText, phoneEditText;
     Button signUpBtn;
     TextView messageTextView;
 
@@ -32,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         progress_circular = findViewById(R.id.progress_circular);
         usernameEditText = findViewById(R.id.usernameEditText);
+        phoneEditText = findViewById(R.id.phoneEditText);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         signUpBtn = findViewById(R.id.signUpBtn);
@@ -50,27 +51,24 @@ public class SignUpActivity extends AppCompatActivity {
         String userName = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String email = emailEditText.getText().toString();
-
+        String phone = phoneEditText.getText().toString();
         Call<SignUpResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class)
-                .performSignUp(userName, email, password);
+                .performSignUp(userName, email, password, phone);
         call.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getStatus().equals("success")){
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus().equals("success")) {
                         Toast.makeText(SignUpActivity.this, "Success", Toast.LENGTH_SHORT).show();
                         onBackPressed();
                         finish();
-                    }
-                    else if (response.body().getStatus().equals("exists")){
+                    } else if (response.body().getStatus().equals("exists")) {
                         displaymessage("Existing Email Address");
-                    }
-                    else{
+                    } else {
                         displaymessage("Something went wrong");
                     }
 
-                }
-                else{
+                } else {
                     displaymessage("Server is down!");
                 }
             }
@@ -82,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void displaymessage(String message){
+    private void displaymessage(String message) {
         passwordEditText.setText("");
         progress_circular.setVisibility(View.INVISIBLE);
         messageTextView.setText(message);

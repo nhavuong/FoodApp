@@ -70,6 +70,16 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:textSize="16sp" />
+        <EditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_lock_24dp"
+            android:drawablePadding="16dp"
+            android:hint="Phone"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:textSize="16sp" />
 
 
         <LinearLayout

@@ -38,7 +38,8 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="32dp"
-        android:paddingRight="32dp">
+        android:paddingRight="32dp"
+        android:paddingBottom="50dp">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progress_circular"

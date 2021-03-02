@@ -8,6 +8,7 @@ import com.example.foodapp.model.SignUpResponse;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -23,7 +24,7 @@ public interface ApiInterface {
     @GET("search/{keyword}")
     Call<List<Food>> getSearchResult(@Path("keyword") String keyword);
 
-
+    @FormUrlEncoded
     @POST("reg")
     Call<SignUpResponse> performSignUp(@Field("name") String name,
                                        @Field("email") String email,

@@ -45,7 +45,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
         String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
 
-        Glide.with(context).load(RetrofitClient.BASE_URL2 + categoryList.get(position).getCat_img()).into(holder.categoryImage);
+        Glide.with(context).load(RetrofitClient.BASE_URL + categoryList.get(position).getCat_img()).into(holder.categoryImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

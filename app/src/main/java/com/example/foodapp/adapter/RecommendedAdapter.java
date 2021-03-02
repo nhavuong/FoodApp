@@ -48,7 +48,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
         String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
 
-        Glide.with(context).load(RetrofitClient.BASE_URL2 + recommendedList.get(position).getFood_img()).into(holder.recommendedImage);
+        Glide.with(context).load(RetrofitClient.BASE_URL + recommendedList.get(position).getFood_img()).into(holder.recommendedImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -74,34 +74,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectCategory() {
-//        Call<List<Category>> call = apiInterface.getCategory();
-//        call.enqueue(new Callback<List<Category>>() {
-//            @Override
-//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-//                populateCategoryData(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Category>> call, Throwable t) {
-//                System.out.println(call.request());
-//                Log.e(TAG, t.getMessage());
-//            }
-//        });
-
-        // try Food type here.
-        Call<List<Food>> call = apiInterface.getCategory();
-        call.enqueue(new Callback<List<Food>>() {
+        Call<List<Category>> call = apiInterface.getCategory();
+        call.enqueue(new Callback<List<Category>>() {
             @Override
-            public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 populateCategoryData(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<Food>> call, Throwable t) {
+            public void onFailure(Call<List<Category>> call, Throwable t) {
                 System.out.println(call.request());
                 Log.e(TAG, t.getMessage());
             }
         });
+
+        // try Food type here.
+//        Call<List<Food>> call = apiInterface.getCategory();
+//        call.enqueue(new Callback<List<Food>>() {
+//            @Override
+//            public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+//                populateCategoryData(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Food>> call, Throwable t) {
+//                System.out.println(call.request());
+//                Log.e(TAG, t.getMessage());
+//            }
+//        });
 
     }
 
@@ -122,23 +122,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void populateCategoryData(List<Category> categoryList){
-//
-//        categoryRecyclerView = findViewById(R.id.category_recycler);
-//        categoryAdapter = new CategoryAdapter(this, categoryList);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        categoryRecyclerView.setLayoutManager(layoutManager);
-//        categoryRecyclerView.setAdapter(categoryAdapter);
-//    }
+    private void populateCategoryData(List<Category> categoryList){
 
-    // try Food type.
-    private void populateCategoryData(List<Food> categoryList){
         categoryRecyclerView = findViewById(R.id.category_recycler);
         categoryAdapter = new CategoryAdapter(this, categoryList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         categoryRecyclerView.setLayoutManager(layoutManager);
         categoryRecyclerView.setAdapter(categoryAdapter);
     }
+
+    // try Food type.
+//    private void populateCategoryData(List<Food> categoryList){
+//        categoryRecyclerView = findViewById(R.id.category_recycler);
+//        categoryAdapter = new CategoryAdapter(this, categoryList);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        categoryRecyclerView.setLayoutManager(layoutManager);
+//        categoryRecyclerView.setAdapter(categoryAdapter);
+//    }
 
 
     private void populateRecommendedData(List<Food> recommendedList){

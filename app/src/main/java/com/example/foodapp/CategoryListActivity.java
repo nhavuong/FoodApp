@@ -14,10 +14,18 @@ import com.example.foodapp.adapter.MenuAdapter;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.Menu;
+import com.example.foodapp.model.SignUpResponse;
+import com.example.foodapp.retrofit.ApiInterface;
+import com.example.foodapp.retrofit.RetrofitClient;
 
 import java.util.List;
 
-public class CategoryActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+public class CategoryListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     TextView tvName, tvDescription, tvPrice;
@@ -38,25 +46,39 @@ public class CategoryActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        food_id = intent.getIntExtra("food_id",0);
-        name = intent.getStringExtra("food_name");
-        price = intent.getDoubleExtra("food_price",0.0);
-        description = intent.getStringExtra("food_description");
+//        food_id = intent.getIntExtra("food_id",0);
+//        name = intent.getStringExtra("food_name");
+//        price = intent.getDoubleExtra("food_price",0.0);
+//        description = intent.getStringExtra("food_description");
         cat_id = intent.getIntExtra("cat_id", 0);
 
 
         // Capture the layout's TextView and set the string as its text
-        tvName = findViewById(R.id.food_name);
-        tvDescription = findViewById(R.id.food_description);
-        tvPrice = findViewById(R.id.food_price);
+//        tvName = findViewById(R.id.food_name);
+//        tvDescription = findViewById(R.id.food_description);
+//        tvPrice = findViewById(R.id.food_price);
+        recyclerView = findViewById(R.id.recycler_menu);
+        // put all data
+        Call<List<Food>> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class)
+                .getCategoryFood(cat_id);
 
-        populateMenu(Menu.menu);
+        call.enqueue(new Callback<List<Food>>() {
+             @Override
+             public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+                 populateMenu(response.body());
+             }
+
+            @Override
+            public void onFailure(Call<List<Food>> call, Throwable t) {
+
+            }
+        });
 
     }
 
     private void populateMenu(List<Food> menuList) {
 
-        recyclerView = findViewById(R.id.recycler_menu);
+//        recyclerView = findViewById(R.id.recycler_menu);
         menuAdapter = new MenuAdapter(menuList, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);

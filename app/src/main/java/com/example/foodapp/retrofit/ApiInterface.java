@@ -15,11 +15,14 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
-//    @GET("category")
-//    Call<List<Category>> getCategory();
-    // try Food type.
     @GET("category")
-    Call<List<Food>> getCategory();
+    Call<List<Category>> getCategory();
+    // try Food type.
+//    @GET("category")
+//    Call<List<Food>> getCategory();
+
+    @GET("categoryfoods/{cat_id}")
+    Call<List<Food>> getCategoryFood(@Path("cat_id") int cat_id);
 
     @GET("recommend")
     Call<List<Food>> getRecommend();

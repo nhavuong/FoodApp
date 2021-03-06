@@ -25,12 +25,11 @@
             android:id="@+id/userNametv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:fontFamily="cursive"
             android:text="Flavor Pho"
-            android:textColor="#F44336"
-            android:textSize="50sp"
-            android:layout_marginTop="15dp"
-            />
+            android:textColor="#FF5722"
+            android:textSize="50sp" />
 
 
     </LinearLayout>
@@ -90,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
 
-                android:backgroundTint="#E8A6A1"
+                android:backgroundTint="#FF5722"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#000000"

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,9 +31,8 @@ public class CategoryListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView tvName, tvDescription, tvPrice;
 
-    int cat_id, food_id, is_recommend;
-    String name, description, imageUrl;
-    Double price;
+    int cat_id;
+
 
     // the adapter is going to add contents raw by raw in this activity.
     MenuAdapter menuAdapter;
@@ -46,11 +46,15 @@ public class CategoryListActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
+        cat_id = intent.getIntExtra("cat_id", 0);
+
+        // data for adding a food.
 //        food_id = intent.getIntExtra("food_id",0);
 //        name = intent.getStringExtra("food_name");
 //        price = intent.getDoubleExtra("food_price",0.0);
 //        description = intent.getStringExtra("food_description");
-        cat_id = intent.getIntExtra("cat_id", 0);
+//        imageUrl = intent.getStringExtra("food_img");
+//        is_recommend = intent.getIntExtra("is_recommend", 0);
 
 
         // Capture the layout's TextView and set the string as its text
@@ -79,6 +83,9 @@ public class CategoryListActivity extends AppCompatActivity {
     private void populateMenu(List<Food> menuList) {
 
 //        recyclerView = findViewById(R.id.recycler_menu);
+        // divide line between foods
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
         menuAdapter = new MenuAdapter(menuList, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -86,11 +93,6 @@ public class CategoryListActivity extends AppCompatActivity {
 
     }
 
-    // maybe I can just call the function by Nina, instead of making a new one here.
-//    public void addFood(View view)
-//    {
-//        Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
-//        Cart.cart.add(food);
-//    }
+
 
 }

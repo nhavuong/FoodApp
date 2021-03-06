@@ -67,7 +67,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                // i.putExtra("price", categoryList.get(position).getPrice());
                 //i.putExtra("rating", categoryList.get(position).getRating());
 //                i.putExtra("image", categoryList.get(position).getCat_img());
+                // only needed data in the beginning.
                 i.putExtra("cat_id", categoryList.get(position).getCat_id());
+
+                // try to add a food.
+//                i.putExtra("food_id", recommendedList.get(position).getFood_id());
+//                i.putExtra("food_name", recommendedList.get(position).getFood_name());
+//                i.putExtra("food_price", recommendedList.get(position).getFood_price());
+//                //i.putExtra("rating", recommendedList.get(position).getRating());
+//                i.putExtra("food_img", recommendedList.get(position).getFood_img());
+//                i.putExtra("food_description", recommendedList.get(position).getFood_description());
+//                i.putExtra("cat_id", categoryList.get(position).getCat_id());
+//                i.putExtra("is_recommend", recommendedList.get(position).getIs_recommend());
 
                 context.startActivity(i);
             }

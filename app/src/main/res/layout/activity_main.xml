@@ -21,25 +21,55 @@
             android:gravity="top"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_weight="7"
-                android:layout_height="match_parent"
-                android:fontFamily="cursive"
-                android:text="Flavor Pho"
-                android:textColor="@android:color/holo_orange_dark"
-                android:textSize="50sp"
-                android:textAlignment="center"/>
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1"
+                android:onClick="goToUser"
+                android:layout_marginRight="15dp"
+                app:srcCompat="@drawable/ic_user" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingEnd="20dp"
-                app:srcCompat="@drawable/ic_user"
-                android:onClick="goToUser"/>
+                android:layout_weight="7"
+                android:fontFamily="cursive"
+                android:text="Flavor Pho"
+                android:textAlignment="center"
+                android:textColor="#FF5722"
+                android:textSize="50sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_marginRight="15dp"
+                    android:text="0"
+                    android:textSize="17dp" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:gravity="top"
+                    app:srcCompat="@drawable/ic_cart" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <EditText
@@ -90,6 +120,7 @@
             android:text="Recommened for You"
             android:textColor="#333333"
             android:textSize="18sp" />
+
 
 
         <androidx.recyclerview.widget.RecyclerView

@@ -8,24 +8,28 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="141dp"
         android:layout_marginTop="80dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome"
-            android:textColor="#000000"
-            android:textSize="32sp" />
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Welcome To"
+            android:textColor="#394947"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/userNametv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:textSize="32sp" />
+            android:layout_marginTop="15dp"
+            android:fontFamily="cursive"
+            android:text="Flavor Pho"
+            android:textColor="#FF5722"
+            android:textSize="50sp" />
 
 
     </LinearLayout>
@@ -33,19 +37,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
         android:layout_marginBottom="32dp"
+        android:layout_weight="4"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
         android:paddingBottom="50dp">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"/>
+<!--        <com.google.android.material.progressindicator.CircularProgressIndicator-->
+<!--            android:id="@+id/progress_circular"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="40dp" />-->
 
         <EditText
             android:id="@+id/emailEditText"
@@ -67,7 +71,9 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
 
+                android:backgroundTint="#FF5722"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#000000"
@@ -94,12 +101,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:backgroundTint="#FFC107"
+                android:onClick="goToSignUp"
                 android:text="Sign up"
                 android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:onClick="goToSignUp"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -111,15 +119,8 @@
             android:layout_marginTop="16dp"
             android:text="Forgot Password?"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="#F44336"
             android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/messageTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="32sp" />
 
 
     </LinearLayout>

@@ -1,9 +1,11 @@
 package com.example.foodapp.adapter;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,10 +22,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     private List<Food> menuList;
     private Context context;
 
-    // for adding a food.
-    int cat_id, food_id, is_recommend;
-    String name, description, imageUrl;
-    Double price;
+    Food food;
 
     public MenuAdapter(List<Food> foodItem, Context context) {
         this.menuList = foodItem;
@@ -42,15 +41,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.foodName.setText(menuList.get(position).getFood_name());
         holder.foodPrice.setText("$ " + menuList.get(position).getFood_price());
         holder.foodDescription.setText(menuList.get(position).getFood_description());
-
-        food_id = menuList.get(position).getFood_id();
-        name = menuList.get(position).getFood_name();
-        price = menuList.get(position).getFood_price();
-        imageUrl = menuList.get(position).getFood_img();
-        description = menuList.get(position).getFood_description();
-        cat_id = menuList.get(position).getCat_id();
-        is_recommend = menuList.get(position).getIs_recommend();
-
+        Food tempFood = menuList.get(position);
+        holder.food = tempFood;
     }
 
     @Override
@@ -59,7 +51,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
         TextView foodName, foodPrice, foodDescription;
 
-
+        // for adding a food.
+        int cat_id, food_id, is_recommend;
+        String name, description, imageUrl;
+        Double price;
+        Food food;
 
         public MenuViewHolder(@NonNull View itemView)
         {
@@ -69,14 +65,43 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             foodPrice = itemView.findViewById(R.id.food_price);
             foodDescription = itemView.findViewById(R.id.food_description);
 
+            itemView.findViewById(R.id.addButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    food_id = food.getFood_id();
+//                    name = food.getFood_name();
+//                    price = food.getFood_price();
+//                    imageUrl = food.getFood_img();
+//                    description = food.getFood_description();
+//                    cat_id = food.getCat_id();
+//                    is_recommend = food.getIs_recommend();
+//
+//                    Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
+                    Cart.cart.add(food);
+                }
+            });
+
         }
     }
 
     // maybe I can just call the function by Nina, instead of making a new one here.
-    public void addFood(View view)
-    {
-        Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
-        Cart.cart.add(food);
-    }
+    // it doesn't work.
+//    public void addMenuFood(View view)
+//    {
+//        Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
+//        Cart.cart.add(food);
+//    }
+
+//    public View getView(final int position, View convertView, ViewGroup parent) {
+//        LayoutInflater inflater = getLayoutInflater();
+//        View row = inflater.inflate(R.layout.menu_list, parent, false);
+//        Button deleteImageView = (Button) row.findViewById(R.id.DeleteImageView);
+//        deleteImageView.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
+//                Cart.cart.add(food);
+//            }
+//        });
+//    }
 
 }

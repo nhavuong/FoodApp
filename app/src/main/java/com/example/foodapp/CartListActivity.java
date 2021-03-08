@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,11 +29,12 @@ public class CartListActivity extends AppCompatActivity {
     private static final String TAG = "CARTLISTACTIVITY";
 
     RecyclerView recycle_cart;
-    TextView total_price;
+    TextView total_price, tax_price;
     Button btn_order;
 
+    Double total = 0.0;
+    Double tax = 0.0;
     CartAdapter cartAdapter;
-
     TextView quantity;
 
     @Override
@@ -44,10 +46,27 @@ public class CartListActivity extends AppCompatActivity {
 //        quantity.setText(String.valueOf());
 
         recycle_cart = (RecyclerView)findViewById(R.id.recycler_cart);
-        total_price = (TextView)findViewById(R.id.total_price);
+        total_price = findViewById(R.id.total_price);
+        tax_price = findViewById(R.id.tax);
         btn_order = findViewById(R.id.btn_order);
 
+        for(Food food : Cart.cart){
+            total += (Double)food.getFood_price();
+        }
+
+        tax = Math.round((0.075 * total)*100)/100D;
+        total = Math.round((tax + total)*100)/100D;
+        tax_price.setText("$ " + tax);
+        total_price.setText("$ " + total);
         populateCartList(Cart.cart);
+
+        btn_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext() ,PaymentActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

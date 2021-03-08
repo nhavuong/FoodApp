@@ -1,5 +1,7 @@
 package com.example.foodapp.model;
 
+import java.util.ArrayList;
+
 public class User {
     int id;
     String email;

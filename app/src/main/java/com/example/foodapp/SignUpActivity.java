@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 performSignUp();
-                progress_circular.setVisibility(View.VISIBLE);
+//                progress_circular.setVisibility(View.VISIBLE);
             }
         });
     }

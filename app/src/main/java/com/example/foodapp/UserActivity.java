@@ -24,23 +24,23 @@ import retrofit2.Response;
 
 public class UserActivity extends AppCompatActivity {
 
-    CircularProgressIndicator progress_circular;
     EditText emailEditText, passwordEditText;
-    Button signInBtn, signUpBtn;
-    TextView forgotPwd, messageTextView;
+    Button signInBtn, signUpBtn, cartbtn, logoutbtn;
+    TextView forgotPwd, welcomeMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        progress_circular = findViewById(R.id.progress_circular);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         signInBtn = findViewById(R.id.signInBtn);
         signUpBtn = findViewById(R.id.signUpBtn);
+        cartbtn = findViewById(R.id.cartbtn);
+        logoutbtn = findViewById(R.id.logoutbtn);
         forgotPwd = findViewById(R.id.forgotPwd);
-        messageTextView = findViewById(R.id.messageTextView);
+        welcomeMessage = findViewById(R.id.welcomeMessage);
 
     }
 
@@ -51,11 +51,30 @@ public class UserActivity extends AppCompatActivity {
         SessionManagement sessionManagement = new SessionManagement(UserActivity.this);
         int userId = sessionManagement.getSession();
         if(userId != -1){
-            moveToMain();
+            emailEditText.setVisibility(View.INVISIBLE);
+            passwordEditText.setVisibility(View.INVISIBLE);
+
+            signInBtn.setVisibility(View.INVISIBLE);
+            signUpBtn.setVisibility(View.INVISIBLE);
+            forgotPwd.setVisibility(View.INVISIBLE);
+
+            logoutbtn.setVisibility(View.VISIBLE);
+            cartbtn.setVisibility(View.VISIBLE);
+            welcomeMessage.setVisibility(View.VISIBLE);
+            welcomeMessage.setText("Hello, " + sessionManagement.getName());
         }
         else{
-            // currently do nothing
-            Toast.makeText(UserActivity.this, "Already logged in. Welcome.", Toast.LENGTH_LONG).show();
+            emailEditText.setVisibility(View.VISIBLE);
+            passwordEditText.setVisibility(View.VISIBLE);
+
+            signInBtn.setVisibility(View.VISIBLE);
+            signUpBtn.setVisibility(View.VISIBLE);
+            forgotPwd.setVisibility(View.VISIBLE);
+
+            logoutbtn.setVisibility(View.INVISIBLE);
+            cartbtn.setVisibility(View.INVISIBLE);
+            welcomeMessage.setVisibility(View.INVISIBLE);
+//            welcomeMessage.setText("Hello, " + sessionManagement.getName());
         }
     }
 
@@ -67,48 +86,68 @@ public class UserActivity extends AppCompatActivity {
     public void login(View view) {
         String email = emailEditText.getText().toString();
         String pwd = passwordEditText.getText().toString();
-        Call<LoginResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class)
-                .performLogin(email, pwd);
-        call.enqueue(new Callback<LoginResponse>() {
 
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                LoginResponse loginResponse = response.body();
-                String status = loginResponse.getStatus();
-                String message = loginResponse.getMessage();
+        if(email.isEmpty()){
+            Toast.makeText(UserActivity.this, "Email cannot be empty.", Toast.LENGTH_LONG).show();
+        }
+        else if(!email.isEmpty() && pwd.isEmpty()){
+            Toast.makeText(UserActivity.this, "Password cannot be empty.", Toast.LENGTH_LONG).show();
+        }
+        else if(!email.isEmpty() && !pwd.isEmpty()){
+            Call<LoginResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class)
+                    .performLogin(email, pwd);
+            call.enqueue(new Callback<LoginResponse>() {
 
-                if(status.equals("success")) {
-                    int id = loginResponse.getUserId();
-                    String name = loginResponse.getName();
-                    String email = loginResponse.getEmail();
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    LoginResponse loginResponse = response.body();
+                    String status = loginResponse.getStatus();
+                    String message = loginResponse.getMessage();
 
-                    User user = new User(id, email, name);
-                    SessionManagement sessionManagement = new SessionManagement(UserActivity.this);
-                    sessionManagement.saveSession(user);
+                    if(status.equals("success")) {
+                        int id = loginResponse.getUserId();
+                        String name = loginResponse.getName();
+                        String email = loginResponse.getEmail();
 
-                    moveToMain();
-                }
-                else if(status.equals("fail")){
-                    if(message.equals("wrong password")){
-                        Toast.makeText(UserActivity.this, "Wrong password.", Toast.LENGTH_LONG).show();
+                        User user = new User(id, email, name);
+                        SessionManagement sessionManagement = new SessionManagement(UserActivity.this);
+                        sessionManagement.saveSession(user);
+
+                        moveToMain();
                     }
-                    else if(message.equals("not existing email")){
-                        Toast.makeText(UserActivity.this, "Not Existing Email, Register first", Toast.LENGTH_LONG).show();
+                    else if(status.equals("fail")){
+                        if(message.equals("wrong password")){
+                            Toast.makeText(UserActivity.this, "Wrong password.", Toast.LENGTH_LONG).show();
+                        }
+                        else if(message.equals("not existing email")){
+                            Toast.makeText(UserActivity.this, "Not Existing Email, Register first", Toast.LENGTH_LONG).show();
+                        }
                     }
+
                 }
 
-            }
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    Toast.makeText(UserActivity.this, "Bad Connection. Wait a moment and try again.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(UserActivity.this, "Bad Connection. Wait a moment and try again.", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     private void moveToMain(){
         Intent i = new Intent(UserActivity.this, MainActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+
+    public void logout(View view) {
+        SessionManagement sessionManagement = new SessionManagement(UserActivity.this);
+        sessionManagement.removeSession();
+        moveToMain();
+    }
+
+    public void goToCart(View view) {
+
     }
 }

@@ -3,6 +3,7 @@ package com.example.foodapp.retrofit;
 
 import com.example.foodapp.model.Category;
 import com.example.foodapp.model.Food;
+import com.example.foodapp.model.LoginResponse;
 import com.example.foodapp.model.SignUpResponse;
 
 import java.util.List;
@@ -36,4 +37,10 @@ public interface ApiInterface {
                                        @Field("email") String email,
                                        @Field("password") String password,
                                        @Field("phone") String phone);
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<LoginResponse> performLogin(@Field("email") String email,
+                                     @Field("password") String password);
+
 }

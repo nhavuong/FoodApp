@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,17 +33,18 @@ public class CartListActivity extends AppCompatActivity {
 
     CartAdapter cartAdapter;
 
+    TextView quantity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_list);
 
+//        quantity = findViewById(R.id.foodQty);
+//        quantity.setText(String.valueOf());
 
         recycle_cart = (RecyclerView)findViewById(R.id.recycler_cart);
         total_price = (TextView)findViewById(R.id.total_price);
-
-        recycle_cart = findViewById(R.id.recycler_cart);
-        total_price = findViewById(R.id.total_price);
         btn_order = findViewById(R.id.btn_order);
 
         populateCartList(Cart.cart);
@@ -57,5 +59,13 @@ public class CartListActivity extends AppCompatActivity {
         recycle_cart.setAdapter(cartAdapter);
 
     }
+
+//    public void addFood(View view)
+//    {
+//        Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend);
+//        Cart.cart.add(food);
+//        quality.setText(String.valueOf(Cart.cart.size()));
+//    }
+
 
 }

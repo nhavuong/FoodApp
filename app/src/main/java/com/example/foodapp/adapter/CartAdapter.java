@@ -35,14 +35,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, final int position) {
         holder.cartName.setText(foodItem.get(position).getFood_name());
         holder.cartPrice.setText("$ " + foodItem.get(position).getFood_price());
-
+        //holder.cartQty.setText(foodItem.get(position).get());
     }
 
     @Override
     public int getItemCount() { return foodItem.size(); }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView cartName, cartPrice;
+        TextView cartName, cartPrice, cartQty;
 
         public CartViewHolder(@NonNull View itemView)
         {

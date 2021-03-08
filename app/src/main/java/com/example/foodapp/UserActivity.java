@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodapp.model.Cart;
+import com.example.foodapp.model.Food;
 import com.example.foodapp.model.LoginResponse;
 import com.example.foodapp.model.SessionManagement;
 import com.example.foodapp.model.SignUpResponse;
@@ -17,6 +19,19 @@ import com.example.foodapp.model.User;
 import com.example.foodapp.retrofit.ApiInterface;
 import com.example.foodapp.retrofit.RetrofitClient;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,6 +124,16 @@ public class UserActivity extends AppCompatActivity {
                         String name = loginResponse.getName();
                         String email = loginResponse.getEmail();
 
+                        Gson gson = new Gson();
+                        Type foodListType = new TypeToken<ArrayList<Food>>(){}.getType();
+                        Cart.cart = gson.fromJson(loginResponse.getCart().getAsString(), foodListType);
+
+                        Cart.amount = 0;
+                        for (Food food:
+                             Cart.cart) {
+                            Cart.amount += food.getQuantity();
+                        }
+
                         User user = new User(id, email, name);
                         SessionManagement sessionManagement = new SessionManagement(UserActivity.this);
                         sessionManagement.saveSession(user);
@@ -128,7 +153,8 @@ public class UserActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    Toast.makeText(UserActivity.this, "Bad Connection. Wait a moment and try again.", Toast.LENGTH_LONG).show();
+                    System.out.println(t.getLocalizedMessage());
+                    Toast.makeText(UserActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -148,6 +174,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void goToCart(View view) {
-
+        Intent i = new Intent(view.getContext(), CartListActivity.class);
+        startActivity(i);
     }
 }

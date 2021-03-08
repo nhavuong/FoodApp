@@ -1,6 +1,11 @@
 package com.example.foodapp.model;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class LoginResponse {
     @SerializedName("status")
@@ -20,6 +25,9 @@ public class LoginResponse {
 
     @SerializedName("phoneNumber")
     private String phoneNumber;
+
+    @SerializedName("cart")
+    private JsonPrimitive cart;
 
     public String getStatus() {
         return status;
@@ -44,5 +52,7 @@ public class LoginResponse {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    public JsonPrimitive getCart(){return cart;}
 
 }

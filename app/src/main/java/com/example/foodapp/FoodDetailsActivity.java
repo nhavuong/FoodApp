@@ -21,7 +21,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
     TextView itemName, itemPrice, itemDescription, itemCount;
     //RatingBar ratingBar;
 
-    int id, cat_id, is_recommend;
+    int id, cat_id, is_recommend, quantity;
     String name, rating, imageUrl, description;
     Double price;
 
@@ -75,8 +75,21 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     public void addFood(View view)
     {
-        Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend);
-        Cart.cart.add(food);
-        itemCount.setText(String.valueOf(Cart.cart.size()));
+        boolean existed = false;
+        for (Food food :
+                Cart.cart) {
+            if (food.getFood_name().equals(name)){
+                existed = true;
+                food.setQuantity(food.getQuantity()+1);
+                Cart.amount++;
+                break;
+            }
+        }
+        if(!existed){
+            Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend, 1);
+            Cart.cart.add(food);
+            Cart.amount++;
+        }
+        itemCount.setText(String.valueOf(Cart.amount));
     }
 }

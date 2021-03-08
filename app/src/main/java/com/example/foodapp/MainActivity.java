@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         itemCount = findViewById(R.id.count);
-        itemCount.setText(String.valueOf(Cart.cart.size()));
+        itemCount.setText(String.valueOf(Cart.amount));
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         connectCategory();
         connectRecommend();
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        itemCount.setText(String.valueOf(Cart.cart.size()));
+        itemCount.setText(String.valueOf(Cart.amount));
     }
 
     private void connectCategory() {

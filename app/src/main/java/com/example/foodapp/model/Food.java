@@ -32,7 +32,11 @@ public class Food {
     @Expose
     private int is_recommend;
 
-    public Food(int food_id, String food_name, String food_description, double food_price, String food_img, int cat_id, int is_recommend) {
+    @SerializedName("quantity")
+    @Expose
+    private int quantity;
+
+    public Food(int food_id, String food_name, String food_description, double food_price, String food_img, int cat_id, int is_recommend, int quantity) {
         this.food_id = food_id;
         this.food_name = food_name;
         this.food_description = food_description;
@@ -40,6 +44,7 @@ public class Food {
         this.food_img = food_img;
         this.cat_id = cat_id;
         this.is_recommend = is_recommend;
+        this.quantity = quantity;
     }
 
     public int getFood_id() {
@@ -96,5 +101,13 @@ public class Food {
 
     public void setIs_recommend(int is_recommend) {
         this.is_recommend = is_recommend;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

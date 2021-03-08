@@ -33,15 +33,15 @@ public class CartListActivity extends AppCompatActivity {
 
     CartAdapter cartAdapter;
 
-    TextView quantity;
+    TextView quantityTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_list);
 
-//        quantity = findViewById(R.id.foodQty);
-//        quantity.setText(String.valueOf());
+        quantityTv = findViewById(R.id.foodQty);
+        quantityTv.setText(String.valueOf(Cart.amount));
 
         recycle_cart = (RecyclerView)findViewById(R.id.recycler_cart);
         total_price = (TextView)findViewById(R.id.total_price);

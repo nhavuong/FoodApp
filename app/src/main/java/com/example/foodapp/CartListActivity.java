@@ -87,7 +87,7 @@ public class CartListActivity extends AppCompatActivity {
         startService(serviceConfig);
 
         System.out.println("Total = " + total);
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(1 + total)), "USD", "Total:", PayPalPayment.PAYMENT_INTENT_SALE);
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(total)), "USD", "Total:", PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent paymentConfig = new Intent(this, PaymentActivity.class);
         paymentConfig.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config); //send the same configuration for restart resiliency

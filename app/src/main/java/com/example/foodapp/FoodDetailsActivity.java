@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.foodapp.adapter.CartAdapter;
+import com.example.foodapp.model.AddingResponse;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.SessionManagement;
@@ -40,7 +41,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         itemCount = findViewById(R.id.count);
-        itemCount.setText(String.valueOf(Cart.cart.size()));
+        itemCount.setText(String.valueOf(Cart.amount));
         id = intent.getIntExtra("food_id",0);
         name = intent.getStringExtra("food_name");
         price = intent.getDoubleExtra("food_price",0.0);
@@ -79,33 +80,35 @@ public class FoodDetailsActivity extends AppCompatActivity {
         int userId = sessionManagement.getSession();
 
         if(userId != -1){
-            // logged in
-//            boolean existed = false;
-//            for (Food f :
-//                    Cart.cart) {
-//                if (f.getFood_name().equals(name)){
-//                    existed = true;
-//                    f.setQuantity(f.getQuantity()+1);
-//                    Cart.amount++;
-//                    break;
-//                }
-//            }
-//            if(!existed){
-//                Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend, 1);
-//                Cart.cart.add(food);
-//                Cart.amount++;
-//            }
-
-
-            Call<Integer> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, id);
-            call.enqueue(new Callback<Integer>() {
+            Call<AddingResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, id);
+            call.enqueue(new Callback<AddingResponse>() {
                 @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                public void onResponse(Call<AddingResponse> call, Response<AddingResponse> response) {
+                    if(response.isSuccessful()){
+                        boolean existed = false;
+                        for (Food f :
+                                Cart.cart) {
+                            if (f.getFood_name().equals(name)){
+                                existed = true;
+                                f.setQuantity(f.getQuantity()+1);
+                                Cart.amount++;
+                                break;
+                            }
+                        }
+                        if(!existed){
+                            Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend, 1);
+                            Cart.cart.add(food);
+                            Cart.amount++;
+                        }
+                        Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<Integer> call, Throwable t) {
+                public void onFailure(Call<AddingResponse> call, Throwable t) {
                     Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
                 }
             });

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
+import com.example.foodapp.model.AddingResponse;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.SessionManagement;
@@ -95,15 +96,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                             Cart.amount++;
                         }
 
-                        Call<Integer> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, food_id);
-                        call.enqueue(new Callback<Integer>() {
+                        Call<AddingResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, food_id);
+                        call.enqueue(new Callback<AddingResponse>() {
                             @Override
-                            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                            public void onResponse(Call<AddingResponse> call, Response<AddingResponse> response) {
                                 Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
-                            public void onFailure(Call<Integer> call, Throwable t) {
+                            public void onFailure(Call<AddingResponse> call, Throwable t) {
                                 Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
                             }
                         });

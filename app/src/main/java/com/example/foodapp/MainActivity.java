@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
                     if(response.isSuccessful()){
-                        Cart.setCart((ArrayList<Food>) response.body());
+                        Cart.cart = (ArrayList<Food>) response.body();
                         int amount = 0;
                         for (Food food:
                                 Cart.cart) {
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             itemCount.setText(String.valueOf(0));
         }
+
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         connectCategory();
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        checkCart = (ImageView) findViewById(R.id.imageView4);
+        checkCart = findViewById(R.id.imageView4);
         checkCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateRecommendedData(List<Food> recommendedList){
-
         recommendedRecyclerView = findViewById(R.id.recommended_recycler);
         recommendedAdapter = new RecommendedAdapter(this, recommendedList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

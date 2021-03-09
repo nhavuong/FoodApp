@@ -170,6 +170,8 @@ public class UserActivity extends AppCompatActivity {
     public void logout(View view) {
         SessionManagement sessionManagement = new SessionManagement(UserActivity.this);
         sessionManagement.removeSession();
+        Cart.cart.clear();
+        Cart.amount = 0;
         moveToMain();
     }
 

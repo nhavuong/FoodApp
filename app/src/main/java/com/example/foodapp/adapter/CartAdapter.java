@@ -56,7 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Food curfood;
         TextView cartName, cartPrice, cartQty;
 
-        public CartViewHolder(@NonNull View itemView)
+        public CartViewHolder(@NonNull final View itemView)
         {
             super(itemView);
 
@@ -91,6 +91,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                         Cart.amount++;
                                     }
                                     cartQty.setText(String.valueOf(curfood.getQuantity()));
+                                    Double total = 0.0;
+                                    for(Food food : Cart.cart){
+                                        total += (Double)food.getFood_price() * food.getQuantity();
+                                    }
+                                    TextView totalPriceTv = itemView.getRootView().findViewById(R.id.total_price);
+                                    totalPriceTv.setText("$ " + total);
+                                    TextView totalTaxTv = itemView.getRootView().findViewById(R.id.tax);
+                                    totalTaxTv.setText("$ " + Math.round((0.075 * total)*100)/100D);
+
                                     Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
                                 }
                             }

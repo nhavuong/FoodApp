@@ -39,7 +39,7 @@
         android:gravity="center"/>
 
     <Button
-        android:id="@+id/addbtnTocart"
+        android:id="@+id/addButton"
         android:layout_width="42dp"
         android:layout_height="match_parent"
         android:fontFamily="@font/open_sans_bold"
@@ -48,7 +48,7 @@
         android:onClick="increment"/>
 
     <Button
-        android:id="@+id/deletebtnTocart"
+        android:id="@+id/deleteButton"
         android:layout_width="42dp"
         android:layout_height="match_parent"
         android:fontFamily="@font/open_sans_bold"

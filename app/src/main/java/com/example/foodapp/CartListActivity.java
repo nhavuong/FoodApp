@@ -49,7 +49,6 @@ public class CartListActivity extends AppCompatActivity {
         tax_price = findViewById(R.id.tax);
         btn_order = findViewById(R.id.btn_order);
 
-
     }
 
     

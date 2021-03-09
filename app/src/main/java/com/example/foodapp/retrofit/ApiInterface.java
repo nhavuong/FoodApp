@@ -1,6 +1,7 @@
 package com.example.foodapp.retrofit;
 
 
+import com.example.foodapp.model.AddingResponse;
 import com.example.foodapp.model.Category;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.LoginResponse;
@@ -50,6 +51,6 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("addToCart")
-    Call<Integer> addToCart(@Field("userid") int id,
-                            @Field("foodid") int foodid);
+    Call<AddingResponse> addToCart(@Field("userid") int id,
+                                   @Field("foodid") int foodid);
 }

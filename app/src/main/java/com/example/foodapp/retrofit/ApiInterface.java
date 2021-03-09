@@ -2,7 +2,9 @@ package com.example.foodapp.retrofit;
 
 
 import com.example.foodapp.model.AddingResponse;
+import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Category;
+import com.example.foodapp.model.DeletingResponse;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.LoginResponse;
 import com.example.foodapp.model.SignUpResponse;
@@ -53,4 +55,9 @@ public interface ApiInterface {
     @POST("addToCart")
     Call<AddingResponse> addToCart(@Field("userid") int id,
                                    @Field("foodid") int foodid);
+
+    @FormUrlEncoded
+    @POST("deleteFromCart")
+    Call<DeletingResponse> deleteFromCart(@Field("userid") int id,
+                                          @Field("foodid") int foodid);
 }

@@ -85,12 +85,6 @@ public class CartListActivity extends AppCompatActivity {
 
     }
 
-//    public void addFood(View view)
-//    {
-//        Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend);
-//        Cart.cart.add(food);
-//        quality.setText(String.valueOf(Cart.cart.size()));
-//    }
 
 
 }

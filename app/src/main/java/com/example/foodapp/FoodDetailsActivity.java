@@ -9,12 +9,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.foodapp.adapter.CartAdapter;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
+import com.example.foodapp.model.SessionManagement;
+import com.example.foodapp.retrofit.ApiInterface;
 import com.example.foodapp.retrofit.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FoodDetailsActivity extends AppCompatActivity {
 
@@ -66,23 +73,47 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     //https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
 
-    public void addFood(View view)
+    public void addFood(final View view)
     {
-        boolean existed = false;
-        for (Food food :
-                Cart.cart) {
-            if (food.getFood_name().equals(name)){
-                existed = true;
-                food.setQuantity(food.getQuantity()+1);
-                Cart.amount++;
-                break;
-            }
+        SessionManagement sessionManagement = new SessionManagement(view.getContext());
+        int userId = sessionManagement.getSession();
+
+        if(userId != -1){
+            // logged in
+//            boolean existed = false;
+//            for (Food f :
+//                    Cart.cart) {
+//                if (f.getFood_name().equals(name)){
+//                    existed = true;
+//                    f.setQuantity(f.getQuantity()+1);
+//                    Cart.amount++;
+//                    break;
+//                }
+//            }
+//            if(!existed){
+//                Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend, 1);
+//                Cart.cart.add(food);
+//                Cart.amount++;
+//            }
+
+
+            Call<Integer> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, id);
+            call.enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+                    Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
+                }
+            });
         }
-        if(!existed){
-            Food food = new Food(id,name,description,price,imageUrl,cat_id,is_recommend, 1);
-            Cart.cart.add(food);
-            Cart.amount++;
+        else{
+            Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_LONG).show();
         }
+
         itemCount.setText(String.valueOf(Cart.amount));
     }
 }

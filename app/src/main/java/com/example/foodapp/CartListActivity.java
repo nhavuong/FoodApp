@@ -42,9 +42,6 @@ public class CartListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_list);
 
-//        quantity = findViewById(R.id.foodQty);
-//        quantity.setText(String.valueOf());
-
         recycle_cart = (RecyclerView)findViewById(R.id.recycler_cart);
         total_price = findViewById(R.id.total_price);
         tax_price = findViewById(R.id.tax);
@@ -52,13 +49,13 @@ public class CartListActivity extends AppCompatActivity {
 
 
 
-//        btn_order.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(v.getContext() ,PaymentActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        btn_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext() ,PaymentActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodapp.R;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
+import com.example.foodapp.model.SessionManagement;
+import com.example.foodapp.retrofit.ApiInterface;
+import com.example.foodapp.retrofit.RetrofitClient;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder>{
 
@@ -41,8 +49,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.foodName.setText(menuList.get(position).getFood_name());
         holder.foodPrice.setText("$ " + menuList.get(position).getFood_price());
         holder.foodDescription.setText(menuList.get(position).getFood_description());
-        Food tempFood = menuList.get(position);
-        holder.food = tempFood;
+        holder.curfood = menuList.get(position);
     }
 
     @Override
@@ -55,7 +62,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         int cat_id, food_id, is_recommend;
         String name, description, imageUrl;
         Double price;
-        Food food;
+        Food curfood;
 
         public MenuViewHolder(@NonNull View itemView)
         {
@@ -67,17 +74,43 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
             itemView.findViewById(R.id.addButton).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-//                    food_id = food.getFood_id();
-//                    name = food.getFood_name();
-//                    price = food.getFood_price();
-//                    imageUrl = food.getFood_img();
-//                    description = food.getFood_description();
-//                    cat_id = food.getCat_id();
-//                    is_recommend = food.getIs_recommend();
-//
-//                    Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
-                    Cart.cart.add(food);
+                public void onClick(final View view) {
+                    SessionManagement sessionManagement = new SessionManagement(view.getContext());
+                    int userId = sessionManagement.getSession();
+                    if(userId != -1){
+                        // logged in
+                        boolean existed = false;
+                        for (Food f :
+                                Cart.cart) {
+                            if (f.getFood_name().equals(curfood.getFood_name())){
+                                existed = true;
+                                f.setQuantity(f.getQuantity()+1);
+                                Cart.amount++;
+                                break;
+                            }
+                        }
+                        if(!existed){
+                            Food food = new Food(curfood.getFood_id(),name,description,price,imageUrl,cat_id,is_recommend, 1);
+                            Cart.cart.add(food);
+                            Cart.amount++;
+                        }
+
+                        Call<Integer> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, food_id);
+                        call.enqueue(new Callback<Integer>() {
+                            @Override
+                            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                                Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Integer> call, Throwable t) {
+                                Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else{
+                        Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
 

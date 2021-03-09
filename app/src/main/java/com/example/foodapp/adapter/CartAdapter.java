@@ -36,7 +36,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.cartName.setText(foodItem.get(position).getFood_name());
         holder.cartPrice.setText("$ " + foodItem.get(position).getFood_price());
         holder.cartQty.setText(String.valueOf(foodItem.get(position).getQuantity()));
-        //holder.cartQty.setText(foodItem.get(position).get());
+
     }
 
     @Override

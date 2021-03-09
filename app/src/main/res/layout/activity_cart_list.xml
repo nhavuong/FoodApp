@@ -100,6 +100,7 @@
             android:fontFamily="@font/open_sans_bold"
             android:text="Order"
             android:textColor="@android:color/white"
+            android:onClick="beginPayment"
             />
     </LinearLayout>
 

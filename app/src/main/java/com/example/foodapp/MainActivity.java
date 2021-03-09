@@ -1,15 +1,11 @@
 package com.example.foodapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,15 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodapp.adapter.AllMenuAdapter;
-
 import com.example.foodapp.adapter.CategoryAdapter;
 import com.example.foodapp.adapter.RecommendedAdapter;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.Category;
 
-import com.example.foodapp.model.Recommended;
 import com.example.foodapp.model.SessionManagement;
 import com.example.foodapp.retrofit.ApiInterface;
 import com.example.foodapp.retrofit.RetrofitClient;
@@ -50,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     EditText search_bar;
     CategoryAdapter categoryAdapter;
     RecommendedAdapter recommendedAdapter;
-    AllMenuAdapter allMenuAdapter;
 
     ImageView checkCart;
     TextView itemCount;

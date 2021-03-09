@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodapp.CategoryListActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.model.AddingResponse;
 import com.example.foodapp.model.Cart;
@@ -57,7 +58,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public int getItemCount() { return menuList.size(); }
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
-        TextView foodName, foodPrice, foodDescription;
+        TextView foodName, foodPrice, foodDescription, tvCount;;
         Food curfood;
 
         public MenuViewHolder(@NonNull View itemView)
@@ -67,6 +68,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             foodName = itemView.findViewById(R.id.food_name);
             foodPrice = itemView.findViewById(R.id.food_price);
             foodDescription = itemView.findViewById(R.id.food_description);
+            tvCount = MenuViewHolder.super.itemView.findViewById(R.id.count);
+
 
             itemView.findViewById(R.id.addButton).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,8 +112,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     }
 
                     // update the number of food in the menu list.
-//                    MenuViewHolder.super.itemView.
+//                    tvCount.setText(String.valueOf(Cart.amount));
 //                            itemCount.setText(String.valueOf(Cart.amount));
+
+                    // https://stackoverflow.com/questions/47728280/how-to-get-textview-of-an-activity-in-an-adapter-class-while-that-textview-is-no
+                    CategoryListActivity.update_value(String.valueOf(Cart.amount+1));
 
                 }
             });

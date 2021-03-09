@@ -2,6 +2,7 @@ package com.example.foodapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ import retrofit2.Retrofit;
 public class CategoryListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    TextView itemCount;
+    static TextView itemCount;
     ImageView checkCart;
 
     int cat_id;
@@ -98,6 +99,15 @@ public class CategoryListActivity extends AppCompatActivity {
 
     }
 
+    // https://stackoverflow.com/questions/47728280/how-to-get-textview-of-an-activity-in-an-adapter-class-while-that-textview-is-no
+    public static void update_value(String value) {
+        try {
+            itemCount.setText(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("Exception","Exception of type"+e.getMessage());
+        }
+    }
 
 
 }

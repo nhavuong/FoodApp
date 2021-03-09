@@ -99,20 +99,20 @@ public class CartListActivity extends AppCompatActivity {
             PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
             if (confirm != null) {
                 try {
-                    Log.i("sampleapp", confirm.toJSONObject().toString(4));
+                    Log.i("foodApp", confirm.toJSONObject().toString(4));
 
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
                     // for more details.
 
                 } catch (JSONException e) {
-                    Log.e("sampleapp", "an extremely unlikely failure occurred: ", e);
+                    Log.e("foodApp", "an extremely unlikely failure occurred: ", e);
                 }
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Log.i("sampleapp", "The user canceled.");
+            Log.i("foodApp", "The user canceled.");
         } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-            Log.i("sampleapp", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+            Log.i("foodApp", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
         }
     }
 

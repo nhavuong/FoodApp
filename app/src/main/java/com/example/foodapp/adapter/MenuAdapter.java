@@ -58,11 +58,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
         TextView foodName, foodPrice, foodDescription;
-
-        // for adding a food.
-        int cat_id, food_id, is_recommend;
-        String name, description, imageUrl;
-        Double price;
         Food curfood;
 
         public MenuViewHolder(@NonNull View itemView)
@@ -79,7 +74,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     SessionManagement sessionManagement = new SessionManagement(view.getContext());
                     int userId = sessionManagement.getSession();
                     if(userId != -1){
-                        Call<AddingResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, food_id);
+                        Call<AddingResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, curfood.getFood_id());
                         call.enqueue(new Callback<AddingResponse>() {
                             @Override
                             public void onResponse(Call<AddingResponse> call, Response<AddingResponse> response) {
@@ -117,25 +112,4 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
         }
     }
-
-    // maybe I can just call the function by Nina, instead of making a new one here.
-    // it doesn't work.
-//    public void addMenuFood(View view)
-//    {
-//        Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
-//        Cart.cart.add(food);
-//    }
-
-//    public View getView(final int position, View convertView, ViewGroup parent) {
-//        LayoutInflater inflater = getLayoutInflater();
-//        View row = inflater.inflate(R.layout.menu_list, parent, false);
-//        Button deleteImageView = (Button) row.findViewById(R.id.DeleteImageView);
-//        deleteImageView.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Food food = new Food(food_id,name,description,price,imageUrl,cat_id,is_recommend);
-//                Cart.cart.add(food);
-//            }
-//        });
-//    }
-
 }

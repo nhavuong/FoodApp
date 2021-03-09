@@ -50,16 +50,9 @@ public class CartListActivity extends AppCompatActivity {
         btn_order = findViewById(R.id.btn_order);
 
 
-
-//        btn_order.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(v.getContext() , PaymentsActivity.class);
-//                startActivity(i);
-//            }
-//        });
-
     }
+
+    
 
     @Override
     protected void onStart() {

@@ -79,28 +79,28 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     SessionManagement sessionManagement = new SessionManagement(view.getContext());
                     int userId = sessionManagement.getSession();
                     if(userId != -1){
-                        // logged in
-                        boolean existed = false;
-                        for (Food f :
-                                Cart.cart) {
-                            if (f.getFood_name().equals(curfood.getFood_name())){
-                                existed = true;
-                                f.setQuantity(f.getQuantity()+1);
-                                Cart.amount++;
-                                break;
-                            }
-                        }
-                        if(!existed){
-                            Food food = new Food(curfood.getFood_id(),name,description,price,imageUrl,cat_id,is_recommend, 1);
-                            Cart.cart.add(food);
-                            Cart.amount++;
-                        }
-
                         Call<AddingResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).addToCart(userId, food_id);
                         call.enqueue(new Callback<AddingResponse>() {
                             @Override
                             public void onResponse(Call<AddingResponse> call, Response<AddingResponse> response) {
-                                Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                                if(response.isSuccessful()){
+                                    boolean existed = false;
+                                    for (Food f :
+                                            Cart.cart) {
+                                        if (f.getFood_name().equals(curfood.getFood_name())){
+                                            existed = true;
+                                            f.setQuantity(f.getQuantity()+1);
+                                            Cart.amount++;
+                                            break;
+                                        }
+                                    }
+                                    if(!existed){
+                                        curfood.setQuantity(1);
+                                        Cart.cart.add(curfood);
+                                        Cart.amount++;
+                                    }
+                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                                }
                             }
 
                             @Override

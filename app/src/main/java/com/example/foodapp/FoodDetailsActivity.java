@@ -100,6 +100,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                             Cart.cart.add(food);
                             Cart.amount++;
                         }
+                        itemCount.setText(String.valueOf(Cart.amount));
                         Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
                     }
                     else{

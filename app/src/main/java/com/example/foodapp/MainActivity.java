@@ -6,6 +6,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -16,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodapp.adapter.AllMenuAdapter;
 
@@ -26,9 +28,11 @@ import com.example.foodapp.model.Food;
 import com.example.foodapp.model.Category;
 
 import com.example.foodapp.model.Recommended;
+import com.example.foodapp.model.SessionManagement;
 import com.example.foodapp.retrofit.ApiInterface;
 import com.example.foodapp.retrofit.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -57,7 +61,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         itemCount = findViewById(R.id.count);
-        itemCount.setText(String.valueOf(Cart.amount));
+
+        SessionManagement sessionManagement = new SessionManagement(this);
+        int userId = sessionManagement.getSession();
+        if(userId != -1){
+            Call<List<Food>> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).getCart(userId);
+            call.enqueue(new Callback<List<Food>>() {
+                @Override
+                public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+                    if(response.isSuccessful()){
+                        Cart.setCart((ArrayList<Food>) response.body());
+                        int amount = 0;
+                        for (Food food:
+                                Cart.cart) {
+                            amount += food.getQuantity();
+                        }
+                        Cart.setAmount(amount);
+                        itemCount.setText(String.valueOf(Cart.amount));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Food>> call, Throwable t) {
+                    System.out.println(t.getLocalizedMessage());
+                    Toast.makeText(MainActivity.this, "Cart loading failed", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            itemCount.setText(String.valueOf(0));
+        }
+
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         connectCategory();
         connectRecommend();
@@ -110,22 +144,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
             }
         });
-
-        // try Food type here.
-//        Call<List<Food>> call = apiInterface.getCategory();
-//        call.enqueue(new Callback<List<Food>>() {
-//            @Override
-//            public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
-//                populateCategoryData(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Food>> call, Throwable t) {
-//                System.out.println(call.request());
-//                Log.e(TAG, t.getMessage());
-//            }
-//        });
-
     }
 
     private void connectRecommend() {
@@ -153,16 +171,6 @@ public class MainActivity extends AppCompatActivity {
         categoryRecyclerView.setLayoutManager(layoutManager);
         categoryRecyclerView.setAdapter(categoryAdapter);
     }
-
-    // try Food type.
-//    private void populateCategoryData(List<Food> categoryList){
-//        categoryRecyclerView = findViewById(R.id.category_recycler);
-//        categoryAdapter = new CategoryAdapter(this, categoryList);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        categoryRecyclerView.setLayoutManager(layoutManager);
-//        categoryRecyclerView.setAdapter(categoryAdapter);
-//    }
-
 
     private void populateRecommendedData(List<Food> recommendedList){
 

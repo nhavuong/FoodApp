@@ -14,15 +14,15 @@ import com.bumptech.glide.Glide;
 import com.example.foodapp.adapter.CartAdapter;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
+import com.example.foodapp.retrofit.RetrofitClient;
 
 public class FoodDetailsActivity extends AppCompatActivity {
 
     ImageView imageView, checkCart;
     TextView itemName, itemPrice, itemDescription, itemCount;
-    //RatingBar ratingBar;
 
     int id, cat_id, is_recommend, quantity;
-    String name, rating, imageUrl, description;
+    String name, imageUrl, description;
     Double price;
 
     @Override
@@ -47,18 +47,11 @@ public class FoodDetailsActivity extends AppCompatActivity {
         itemName = findViewById(R.id.name);
         itemPrice = findViewById(R.id.price);
         itemDescription = findViewById(R.id.description);
-        //itemRating = findViewById(R.id.rating);
-        //ratingBar = findViewById(R.id.ratingBar);
 
-        String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
-        String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
-
-        Glide.with(getApplicationContext()).load(BASE_URL2 + imageUrl).into(imageView);
+        Glide.with(getApplicationContext()).load(RetrofitClient.BASE_URL + imageUrl).into(imageView);
         itemName.setText(name);
         itemPrice.setText("$ "+price);
         itemDescription.setText(description);
-        //itemRating.setText(rating);
-        //ratingBar.setRating(Float.parseFloat(rating));
 
         checkCart = (ImageView)findViewById(R.id.imageView4);
         checkCart.setOnClickListener(new View.OnClickListener() {

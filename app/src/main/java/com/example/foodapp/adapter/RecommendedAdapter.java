@@ -40,13 +40,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, final int position) {
 
         holder.recommendedName.setText(recommendedList.get(position).getFood_name());
-        //holder.recommendedRating.setText(recommendedList.get(position).getRating());
-        //holder.recommendedCharges.setText(recommendedList.get(position).getDeliveryCharges());
-        //holder.recommendedDeliveryTime.setText(recommendedList.get(position).getDeliveryTime());
         holder.recommendedPrice.setText("$ "+recommendedList.get(position).getFood_price());
-
-        String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
-        String BASE_URL2 = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
 
         Glide.with(context).load(RetrofitClient.BASE_URL + recommendedList.get(position).getFood_img()).into(holder.recommendedImage);
 
@@ -57,7 +51,6 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
                 i.putExtra("food_id", recommendedList.get(position).getFood_id());
                 i.putExtra("food_name", recommendedList.get(position).getFood_name());
                 i.putExtra("food_price", recommendedList.get(position).getFood_price());
-                //i.putExtra("rating", recommendedList.get(position).getRating());
                 i.putExtra("food_img", recommendedList.get(position).getFood_img());
                 i.putExtra("food_description", recommendedList.get(position).getFood_description());
                 i.putExtra("cat_id", recommendedList.get(position).getCat_id());
@@ -76,17 +69,13 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     public static class RecommendedViewHolder extends RecyclerView.ViewHolder{
 
         ImageView recommendedImage;
-        TextView recommendedName, recommendedRating, recommendedDeliveryTime, recommendedCharges, recommendedPrice;
+        TextView recommendedName, recommendedPrice;
 
         public RecommendedViewHolder(@NonNull View itemView) {
             super(itemView);
 
             recommendedImage = itemView.findViewById(R.id.recommended_image);
             recommendedName = itemView.findViewById(R.id.recommended_name);
-           // recommendedRating = itemView.findViewById(R.id.recommended_rating);
-            // recommendedDeliveryTime = itemView.findViewById(R.id.recommended_delivery_time);
-           // recommendedCharges = itemView.findViewById(R.id.delivery_type);
-           // recommendedCharges = itemView.findViewById(R.id.delivery_type);
             recommendedPrice = itemView.findViewById(R.id.recommended_price);
 
         }

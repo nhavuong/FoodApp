@@ -50,8 +50,23 @@ public class CartListActivity extends AppCompatActivity {
         tax_price = findViewById(R.id.tax);
         btn_order = findViewById(R.id.btn_order);
 
+
+
+//        btn_order.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(v.getContext() ,PaymentActivity.class);
+//                startActivity(i);
+//            }
+//        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         for(Food food : Cart.cart){
-            total += (Double)food.getFood_price();
+            total += (Double)food.getFood_price() * food.getQuantity();
         }
 
         tax = Math.round((0.075 * total)*100)/100D;
@@ -59,15 +74,6 @@ public class CartListActivity extends AppCompatActivity {
         tax_price.setText("$ " + tax);
         total_price.setText("$ " + total);
         populateCartList(Cart.cart);
-
-        btn_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext() ,PaymentActivity.class);
-                startActivity(i);
-            }
-        });
-
     }
 
     private void populateCartList(List<Food> foodList){

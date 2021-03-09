@@ -13,6 +13,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -43,4 +44,6 @@ public interface ApiInterface {
     Call<LoginResponse> performLogin(@Field("email") String email,
                                      @Field("password") String password);
 
+    @GET("cart")
+    Call<List<Food>> getCart(@Query("userid") int id);
 }

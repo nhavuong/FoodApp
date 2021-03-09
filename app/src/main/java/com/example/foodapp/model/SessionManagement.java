@@ -3,6 +3,8 @@ package com.example.foodapp.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+
 public class SessionManagement {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -29,7 +31,9 @@ public class SessionManagement {
 
     public String getName(){return sharedPreferences.getString(NAME_KEY, "");}
 
+
     public void removeSession(){
         editor.clear().commit();
     }
+
 }

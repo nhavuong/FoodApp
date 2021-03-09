@@ -19,6 +19,7 @@
         <activity android:name=".SearchResultActivity" />
         <activity android:name=".FoodDetailsActivity" />
         <activity android:name=".CategoryListActivity" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

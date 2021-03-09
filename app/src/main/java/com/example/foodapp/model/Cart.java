@@ -1,7 +1,5 @@
 package com.example.foodapp.model;
 
-import android.app.Application;
-
 import java.util.ArrayList;
 
 public class Cart {

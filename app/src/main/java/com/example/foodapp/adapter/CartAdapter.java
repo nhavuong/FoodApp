@@ -90,18 +90,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                         Cart.cart.add(curfood);
                                         Cart.amount++;
                                     }
-                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                                    cartQty.setText(String.valueOf(curfood.getQuantity()));
+                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<AddingResponse> call, Throwable t) {
-                                Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
+                                Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                     else{
-                        Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_SHORT).show();
                     }
 
                 }

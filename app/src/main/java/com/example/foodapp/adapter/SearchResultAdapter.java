@@ -62,7 +62,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             super(itemView);
             this.foodNametv = itemView.findViewById(R.id.foodNametv);
             this.foodPricetv = itemView.findViewById(R.id.foodPricetv);
-            this.addbtnTocart = itemView.findViewById(R.id.addbtnTocart);
+            this.addbtnTocart = itemView.findViewById(R.id.addButton);
         }
     }
 }

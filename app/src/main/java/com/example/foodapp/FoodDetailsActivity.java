@@ -101,21 +101,21 @@ public class FoodDetailsActivity extends AppCompatActivity {
                             Cart.amount++;
                         }
                         itemCount.setText(String.valueOf(Cart.amount));
-                        Toast.makeText(view.getContext(), "food added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<AddingResponse> call, Throwable t) {
-                    Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_SHORT).show();
                 }
             });
         }
         else{
-            Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_SHORT).show();
         }
 
         itemCount.setText(String.valueOf(Cart.amount));

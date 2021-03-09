@@ -8,8 +8,8 @@ public class RetrofitClient {
     private static Retrofit retrofit;
 //    public static final String BASE_URL = "http://foodordering-env.eba-smutnzic.us-east-2.elasticbeanstalk.com/";
     // for my implementation.
-    public static final String BASE_URL = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
-    //public static final String BASE_URL = "http://10.0.2.2:5000/";
+//    public static final String BASE_URL = "http://foodapp-env.eba-idm3cpsj.us-east-2.elasticbeanstalk.com/";
+    public static final String BASE_URL = "http://10.0.2.2:5000/";
 
 
     public static Retrofit getRetrofitInstance(){

@@ -34,8 +34,6 @@ public class CartListActivity extends AppCompatActivity {
     TextView total_price, tax_price;
     Button btn_order;
 
-    Double total = 0.0;
-    Double tax = 0.0;
     CartAdapter cartAdapter;
     TextView quantity;
 
@@ -56,14 +54,8 @@ public class CartListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        for(Food food : Cart.cart){
-            total += (Double)food.getFood_price() * food.getQuantity();
-        }
-
-        tax = Math.round((0.075 * total)*100)/100D;
-        total = Math.round((tax + total)*100)/100D;
-        tax_price.setText("$ " + tax);
-        total_price.setText("$ " + total);
+        total_price.setText("$ " + Cart.getTotalPrice());
+        tax_price.setText("$ " + Cart.getTotalTax());
         populateCartList(Cart.cart);
     }
 
@@ -85,8 +77,8 @@ public class CartListActivity extends AppCompatActivity {
         serviceConfig.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(serviceConfig);
 
-        System.out.println("Total = " + total);
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(total)), "USD", "Total:", PayPalPayment.PAYMENT_INTENT_SALE);
+        System.out.println("Total = " + Cart.getTotalPrice());
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(Cart.getTotalPrice())), "USD", "Total:", PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent paymentConfig = new Intent(this, PaymentActivity.class);
         paymentConfig.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config); //send the same configuration for restart resiliency

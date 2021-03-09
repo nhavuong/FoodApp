@@ -72,6 +72,12 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        itemCount.setText(String.valueOf(Cart.amount));
+    }
+
     //https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
 
     public void addFood(final View view)

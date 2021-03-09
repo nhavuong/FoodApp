@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodapp.R;
 import com.example.foodapp.model.AddingResponse;
 import com.example.foodapp.model.Cart;
+import com.example.foodapp.model.DeletingResponse;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.SessionManagement;
 import com.example.foodapp.retrofit.ApiInterface;
@@ -104,6 +105,66 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                             @Override
                             public void onFailure(Call<AddingResponse> call, Throwable t) {
                                 Toast.makeText(view.getContext(), "food not added", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    else{
+                        Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+
+            itemView.findViewById(R.id.deleteButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    SessionManagement sessionManagement = new SessionManagement(view.getContext());
+                    int userId = sessionManagement.getSession();
+                    if(userId != -1){
+                        Call<DeletingResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).deleteFromCart(userId, curfood.getFood_id());
+                        call.enqueue(new Callback<DeletingResponse>() {
+                            @Override
+                            public void onResponse(Call<DeletingResponse> call, Response<DeletingResponse> response) {
+                                if(response.isSuccessful()){
+
+                                    if(curfood.getQuantity() == 1 && Cart.amount == 1)
+                                    {
+                                        Cart.cart.remove(curfood);
+                                        curfood.setQuantity(0);
+                                        Cart.amount = 0;
+                                    }
+                                    else if (curfood.getQuantity() == 1 && Cart.amount > 1) {
+                                        Cart.cart.remove(curfood);
+                                        curfood.setQuantity(0);
+                                        Cart.amount --;
+                                    }
+                                    else if (Cart.amount > 0)
+                                    {
+                                        for (Food f : Cart.cart) {
+                                            if (f.getFood_name().equals(curfood.getFood_name())) {
+                                                f.setQuantity(f.getQuantity() - 1);
+                                                Cart.amount--;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    cartQty.setText(String.valueOf(curfood.getQuantity()));
+
+                                    TextView totalPriceTv = itemView.getRootView().findViewById(R.id.total_price);
+                                    totalPriceTv.setText("$ " + Cart.getTotalPrice());
+                                    TextView totalTaxTv = itemView.getRootView().findViewById(R.id.tax);
+                                    totalTaxTv.setText("$ " + Cart.getTotalTax());
+
+                                    Toast.makeText(view.getContext(), "food deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+
+                            @Override
+                            public void onFailure(Call<DeletingResponse> call, Throwable t) {
+                                Toast.makeText(view.getContext(), "food not deleted", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

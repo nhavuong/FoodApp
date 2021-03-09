@@ -47,9 +47,10 @@ public class CartListActivity extends AppCompatActivity {
         tax_price = findViewById(R.id.tax);
         btn_order = findViewById(R.id.btn_order);
 
-    }
+        recycle_cart.setAdapter(cartAdapter);
 
-    
+
+    }
 
     @Override
     protected void onStart() {
@@ -57,6 +58,7 @@ public class CartListActivity extends AppCompatActivity {
         total_price.setText("$ " + Cart.getTotalPrice());
         tax_price.setText("$ " + Cart.getTotalTax());
         populateCartList(Cart.cart);
+
     }
 
     private void populateCartList(List<Food> foodList){
@@ -66,7 +68,11 @@ public class CartListActivity extends AppCompatActivity {
         recycle_cart.setLayoutManager(layoutManager);
         recycle_cart.setAdapter(cartAdapter);
 
+        recycle_cart.setAdapter(cartAdapter);
+        cartAdapter.notifyDataSetChanged();
+
     }
+
 
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)

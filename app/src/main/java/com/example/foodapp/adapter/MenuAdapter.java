@@ -107,6 +107,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     else{
                         Toast.makeText(view.getContext(), "need to login", Toast.LENGTH_SHORT).show();
                     }
+
+                    // update the number of food in the menu list.
+//                    MenuViewHolder.super.itemView.
+//                            itemCount.setText(String.valueOf(Cart.amount));
+
                 }
             });
 

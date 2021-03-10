@@ -103,10 +103,10 @@ public class UserActivity extends AppCompatActivity {
         String pwd = passwordEditText.getText().toString();
 
         if(email.isEmpty()){
-            Toast.makeText(UserActivity.this, "Email cannot be empty.", Toast.LENGTH_LONG).show();
+            Toast.makeText(UserActivity.this, "Email cannot be empty.", Toast.LENGTH_SHORT).show();
         }
         else if(!email.isEmpty() && pwd.isEmpty()){
-            Toast.makeText(UserActivity.this, "Password cannot be empty.", Toast.LENGTH_LONG).show();
+            Toast.makeText(UserActivity.this, "Password cannot be empty.", Toast.LENGTH_SHORT).show();
         }
         else if(!email.isEmpty() && !pwd.isEmpty()){
             Call<LoginResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class)
@@ -142,10 +142,10 @@ public class UserActivity extends AppCompatActivity {
                     }
                     else if(status.equals("fail")){
                         if(message.equals("wrong password")){
-                            Toast.makeText(UserActivity.this, "Wrong password.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(UserActivity.this, "Wrong password.", Toast.LENGTH_SHORT).show();
                         }
                         else if(message.equals("not existing email")){
-                            Toast.makeText(UserActivity.this, "Not Existing Email, Register first", Toast.LENGTH_LONG).show();
+                            Toast.makeText(UserActivity.this, "Not Existing Email, Register first", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -154,7 +154,7 @@ public class UserActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     System.out.println(t.getLocalizedMessage());
-                    Toast.makeText(UserActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

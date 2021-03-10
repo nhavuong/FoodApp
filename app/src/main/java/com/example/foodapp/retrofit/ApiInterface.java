@@ -7,6 +7,7 @@ import com.example.foodapp.model.Category;
 import com.example.foodapp.model.DeletingResponse;
 import com.example.foodapp.model.Food;
 import com.example.foodapp.model.LoginResponse;
+import com.example.foodapp.model.OrderPaidResponse;
 import com.example.foodapp.model.SignUpResponse;
 
 import java.util.List;
@@ -60,4 +61,9 @@ public interface ApiInterface {
     @POST("deleteFromCart")
     Call<DeletingResponse> deleteFromCart(@Field("userid") int id,
                                           @Field("foodid") int foodid);
+
+    @FormUrlEncoded
+    @POST("orderpaid")
+    Call<OrderPaidResponse> orderPaid(@Field("userid") int id,
+                                      @Field("paymentid") String paymentId);
 }

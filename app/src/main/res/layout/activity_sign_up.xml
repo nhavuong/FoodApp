@@ -39,12 +39,6 @@
         android:paddingRight="32dp"
         android:paddingBottom="150dp">
 
-<!--        <com.google.android.material.progressindicator.CircularProgressIndicator-->
-<!--            android:id="@+id/progress_circular"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginBottom="20dp" />-->
-
         <EditText
             android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
@@ -97,7 +91,7 @@
             android:id="@+id/phoneEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_lock_24dp"
+            android:drawableStart="@drawable/ic_phone"
             android:drawablePadding="16dp"
             android:hint="Phone"
             android:inputType="phone"

@@ -15,6 +15,10 @@ import android.widget.TextView;
 import com.example.foodapp.adapter.CartAdapter;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Food;
+import com.example.foodapp.model.OrderPaidResponse;
+import com.example.foodapp.model.SessionManagement;
+import com.example.foodapp.retrofit.ApiInterface;
+import com.example.foodapp.retrofit.RetrofitClient;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -24,7 +28,14 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import org.json.JSONException;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartListActivity extends AppCompatActivity {
 
@@ -79,6 +90,31 @@ public class CartListActivity extends AppCompatActivity {
             .clientId("AZzIokUiGGTxL9RVse9ipFywdDNS4ux9h_d1RcddAsS6uf9qFdko3Vn8ut7GKsnVkMXKBUcuPd9xziA5");
 
     public void beginPayment(View view){
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        String payment_id = date.toString();
+        SessionManagement sessionManagement= new SessionManagement(this);
+        int userId = sessionManagement.getSession();
+        if(userId != -1){
+            Call<OrderPaidResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).orderPaid(userId, payment_id);
+            call.enqueue(new Callback<OrderPaidResponse>() {
+                @Override
+                public void onResponse(Call<OrderPaidResponse> call, Response<OrderPaidResponse> response) {
+                    if(response.isSuccessful()){
+                        Cart.cart = new ArrayList<>();
+                        Cart.setAmount(0);
+                    }
+                    else{
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<OrderPaidResponse> call, Throwable t) {
+
+                }
+            });
+        }
         Intent serviceConfig = new Intent(this, PayPalService.class);
         serviceConfig.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(serviceConfig);
@@ -101,6 +137,29 @@ public class CartListActivity extends AppCompatActivity {
                 try {
                     Log.i("foodApp", confirm.toJSONObject().toString(4));
 
+                    String payment_id = confirm.toJSONObject().toString();
+                    SessionManagement sessionManagement= new SessionManagement(this);
+                    int userId = sessionManagement.getSession();
+                    if(userId != -1){
+                        Call<OrderPaidResponse> call = RetrofitClient.getRetrofitInstance().create(ApiInterface.class).orderPaid(userId, payment_id);
+                        call.enqueue(new Callback<OrderPaidResponse>() {
+                            @Override
+                            public void onResponse(Call<OrderPaidResponse> call, Response<OrderPaidResponse> response) {
+                                if(response.isSuccessful()){
+                                    Cart.cart = new ArrayList<>();
+                                    Cart.setAmount(0);
+                                }
+                                else{
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<OrderPaidResponse> call, Throwable t) {
+
+                            }
+                        });
+                    }
 
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
@@ -123,6 +182,9 @@ public class CartListActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    public void updateList(){
+        cartAdapter.notifyDataSetChanged();
+    }
 
 
 }

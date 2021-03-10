@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             itemCount.setText(String.valueOf(0));
         }
 
-
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         connectCategory();
         connectRecommend();

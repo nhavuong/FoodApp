@@ -101,6 +101,7 @@ public class CartListActivity extends AppCompatActivity {
                 try {
                     Log.i("foodApp", confirm.toJSONObject().toString(4));
 
+
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
                     // for more details.

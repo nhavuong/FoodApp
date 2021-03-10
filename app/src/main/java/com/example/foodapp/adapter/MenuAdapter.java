@@ -97,7 +97,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                                         Cart.cart.add(curfood);
                                         Cart.amount++;
                                     }
-                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
                                 }
                             }
 

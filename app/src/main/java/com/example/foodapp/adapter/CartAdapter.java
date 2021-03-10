@@ -99,7 +99,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                     TextView totalTaxTv = itemView.getRootView().findViewById(R.id.tax);
                                     totalTaxTv.setText("$ " + Cart.getTotalTax());
 
-                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(view.getContext(), "food added", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -158,7 +158,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                     TextView totalTaxTv = itemView.getRootView().findViewById(R.id.tax);
                                     totalTaxTv.setText("$ " + Cart.getTotalTax());
 
-                                    Toast.makeText(view.getContext(), "food deleted", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(view.getContext(), "food deleted", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
